@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -105,7 +105,7 @@ public final class TrollPotionHack extends Hack
 			for(int i = 1; i <= 23; i++)
 			{
 				MobEffect effect =
-					BuiltInRegistries.MOB_EFFECT.get(i).get().value();
+					BuiltInRegistries.MOB_EFFECT.getHolder(i).get().value();
 				Holder<MobEffect> entry =
 					BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect);
 				
@@ -114,7 +114,7 @@ public final class TrollPotionHack extends Hack
 			}
 			
 			stack.set(DataComponents.POTION_CONTENTS, new PotionContents(
-				Optional.empty(), Optional.empty(), effects, Optional.empty()));
+				Optional.empty(), Optional.empty(), effects));
 			
 			String name = "\u00a7f" + itemName + " of Trolling";
 			stack.set(DataComponents.CUSTOM_NAME, Component.literal(name));

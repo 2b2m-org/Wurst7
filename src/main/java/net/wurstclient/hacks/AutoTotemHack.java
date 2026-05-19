@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -8,15 +8,14 @@
 package net.wurstclient.hacks;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
-import net.wurstclient.mixinterface.IMultiPlayerGameMode;
+import net.wurstclient.mixinterface.IClientPlayerInteractionManager;
 import net.wurstclient.settings.CheckboxSetting;
 import net.wurstclient.settings.SliderSetting;
 import net.wurstclient.settings.SliderSetting.ValueDisplay;
@@ -108,8 +107,7 @@ public final class AutoTotemHack extends Hack implements UpdateListener
 		
 		// don't move items while a container is open
 		if(MC.screen instanceof AbstractContainerScreen
-			&& !(MC.screen instanceof InventoryScreen
-				|| MC.screen instanceof CreativeModeInventoryScreen))
+			&& !(MC.screen instanceof EffectRenderingInventoryScreen))
 			return;
 		
 		if(timer > 0)
@@ -125,7 +123,7 @@ public final class AutoTotemHack extends Hack implements UpdateListener
 	{
 		boolean offhandEmpty = MC.player.getOffhandItem().isEmpty();
 		
-		IMultiPlayerGameMode im = IMC.getInteractionManager();
+		IClientPlayerInteractionManager im = IMC.getInteractionManager();
 		im.windowClick_PICKUP(itemSlot);
 		im.windowClick_PICKUP(45);
 		
@@ -138,7 +136,7 @@ public final class AutoTotemHack extends Hack implements UpdateListener
 		if(nextTickSlot == -1)
 			return;
 		
-		IMultiPlayerGameMode im = IMC.getInteractionManager();
+		IClientPlayerInteractionManager im = IMC.getInteractionManager();
 		im.windowClick_PICKUP(nextTickSlot);
 		nextTickSlot = -1;
 	}

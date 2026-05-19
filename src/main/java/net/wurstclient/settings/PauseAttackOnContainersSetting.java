@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -9,8 +9,7 @@ package net.wurstclient.settings;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.wurstclient.WurstClient;
 
 public final class PauseAttackOnContainersSetting extends CheckboxSetting
@@ -36,7 +35,6 @@ public final class PauseAttackOnContainersSetting extends CheckboxSetting
 		Screen screen = WurstClient.MC.screen;
 		
 		return screen instanceof AbstractContainerScreen
-			&& !(screen instanceof InventoryScreen
-				|| screen instanceof CreativeModeInventoryScreen);
+			&& !(screen instanceof EffectRenderingInventoryScreen);
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -48,9 +48,9 @@ public final class MaceDmgHack extends Hack
 		if(!MC.player.getMainHandItem().is(Items.MACE))
 			return;
 			
-		// See ServerGamePacketListenerImpl.handleMovePlayer()
+		// See ServerPlayNetworkHandler.onPlayerMove()
 		// for why it's using these numbers.
-		// Also, let me know if you find a way to bypass that check.
+		// Also, let me know if you find a way to bypass that check in 1.21.
 		for(int i = 0; i < 4; i++)
 			sendFakeY(0);
 		sendFakeY(Math.sqrt(500));
@@ -59,8 +59,7 @@ public final class MaceDmgHack extends Hack
 	
 	private void sendFakeY(double offset)
 	{
-		MC.player.connection
-			.send(new Pos(MC.player.getX(), MC.player.getY() + offset,
-				MC.player.getZ(), false, MC.player.horizontalCollision));
+		MC.player.connection.send(new Pos(MC.player.getX(),
+			MC.player.getY() + offset, MC.player.getZ(), false));
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -7,7 +7,7 @@
  */
 package net.wurstclient.hacks;
 
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.wurstclient.Category;
 import net.wurstclient.hack.DontSaveState;
@@ -31,17 +31,17 @@ public final class LsdHack extends Hack
 			return;
 		}
 		
-		if(MC.gameRenderer.currentPostEffect() != null)
-			MC.gameRenderer.clearPostEffect();
+		if(MC.gameRenderer.currentEffect() != null)
+			MC.gameRenderer.shutdownEffect();
 		
 		MC.gameRenderer
-			.setPostEffect(Identifier.fromNamespaceAndPath("wurst", "lsd"));
+			.loadEffect(ResourceLocation.parse("shaders/post/lsd.json"));
 	}
 	
 	@Override
 	protected void onDisable()
 	{
-		if(MC.gameRenderer.currentPostEffect() != null)
-			MC.gameRenderer.clearPostEffect();
+		if(MC.gameRenderer.currentEffect() != null)
+			MC.gameRenderer.shutdownEffect();
 	}
 }

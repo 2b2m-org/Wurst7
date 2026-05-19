@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLevelEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.Version;
@@ -79,9 +78,6 @@ public final class PlausibleAnalytics
 		
 		Thread.ofPlatform().daemon().name("Plausible")
 			.start(this::runBackgroundLoop);
-		
-		ClientLevelEvents.AFTER_CLIENT_LEVEL_CHANGE
-			.register(this::onWorldChange);
 	}
 	
 	private String getVersion(String modId)
@@ -100,7 +96,7 @@ public final class PlausibleAnalytics
 		return version;
 	}
 	
-	private void onWorldChange(Minecraft client, ClientLevel world)
+	public void onWorldChange(Minecraft client, ClientLevel world)
 	{
 		sessionProp("language", getLanguage(client));
 		sessionProp("game_type", getGameType(client));
@@ -140,7 +136,7 @@ public final class PlausibleAnalytics
 	private boolean isDebugMode()
 	{
 		return FabricLoader.getInstance().isDevelopmentEnvironment()
-			|| System.getProperty("fabric.client.gametest") != null;
+			|| System.getProperty("wurst.e2eTest") != null;
 	}
 	
 	private void runBackgroundLoop()

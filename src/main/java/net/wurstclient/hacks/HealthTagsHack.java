@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -24,7 +24,7 @@ public final class HealthTagsHack extends Hack
 		setCategory(Category.RENDER);
 	}
 	
-	public Component addHealth(LivingEntity entity, MutableComponent nametag)
+	public Component addHealth(LivingEntity entity, Component nametag)
 	{
 		if(!isEnabled())
 			return nametag;
@@ -33,7 +33,7 @@ public final class HealthTagsHack extends Hack
 		
 		MutableComponent formattedHealth = Component.literal(" ")
 			.append(Integer.toString(health)).withStyle(getColor(health));
-		return nametag.append(formattedHealth);
+		return ((MutableComponent)nametag).append(formattedHealth);
 	}
 	
 	private ChatFormatting getColor(int health)
@@ -50,5 +50,5 @@ public final class HealthTagsHack extends Hack
 		return ChatFormatting.GREEN;
 	}
 	
-	// See EntityRendererMixin
+	// See EntityRendererMixin.onRenderLabelIfPresent()
 }

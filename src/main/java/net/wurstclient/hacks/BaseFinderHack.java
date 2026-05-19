@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
@@ -157,13 +158,16 @@ public final class BaseFinderHack extends Hack
 		if(vertexBuffer == null)
 			return;
 		
+		color.setAsShaderColor(0.25F);
+		
 		matrixStack.pushPose();
 		RenderUtils.applyRegionalRenderOffset(matrixStack, region);
 		
-		vertexBuffer.draw(matrixStack, WurstRenderLayers.ESP_QUADS,
-			color.getColorF(), 0.25F);
+		vertexBuffer.draw(matrixStack, WurstRenderLayers.ESP_QUADS);
 		
 		matrixStack.popPose();
+		
+		RenderSystem.setShaderColor(1, 1, 1, 1);
 	}
 	
 	@Override
@@ -192,8 +196,8 @@ public final class BaseFinderHack extends Hack
 			matchingBlocks.clear();
 		
 		int stepSize = MC.level.getHeight() / 64;
-		int startY = MC.level.getMaxY() - 1 - modulo * stepSize;
-		int endY = Math.max(startY - stepSize, MC.level.getMinY());
+		int startY = MC.level.getMaxBuildHeight() - 1 - modulo * stepSize;
+		int endY = startY - stepSize;
 		
 		BlockPos playerPos =
 			BlockPos.containing(MC.player.getX(), 0, MC.player.getZ());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -8,10 +8,9 @@
 package net.wurstclient.settings.filters;
 
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.AgeableWaterCreature;
+import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.entity.animal.fish.Pufferfish;
-import net.minecraft.world.entity.animal.fish.WaterAnimal;
 
 public final class FilterPassiveWaterSetting extends EntityFilterCheckbox
 {
@@ -31,8 +30,7 @@ public final class FilterPassiveWaterSetting extends EntityFilterCheckbox
 		if(e instanceof Pufferfish)
 			return true;
 		
-		return !(e instanceof WaterAnimal || e instanceof AgeableWaterCreature
-			|| e instanceof Axolotl);
+		return !(e instanceof WaterAnimal || e instanceof Axolotl);
 	}
 	
 	public static FilterPassiveWaterSetting genericCombat(boolean checked)

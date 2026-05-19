@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -15,14 +15,14 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.wurstclient.Category;
 import net.wurstclient.SearchTags;
 import net.wurstclient.clickgui.screens.ClickGuiScreen;
 import net.wurstclient.events.UpdateListener;
 import net.wurstclient.hack.Hack;
-import net.wurstclient.mixinterface.IKeyMapping;
+import net.wurstclient.mixinterface.IKeyBinding;
 import net.wurstclient.settings.CheckboxSetting;
 
 @SearchTags({"inv walk", "inventory walk", "InvMove", "inv move",
@@ -93,13 +93,12 @@ public final class InvWalkHack extends Hack implements UpdateListener
 			keys.add(MC.options.keyJump);
 		
 		for(KeyMapping key : keys)
-			IKeyMapping.get(key).resetPressedState();
+			IKeyBinding.get(key).resetPressedState();
 	}
 	
 	private boolean isAllowedScreen(Screen screen)
 	{
-		if((screen instanceof InventoryScreen
-			|| screen instanceof CreativeModeInventoryScreen)
+		if(screen instanceof EffectRenderingInventoryScreen
 			&& !isCreativeSearchBarOpen(screen))
 			return true;
 		

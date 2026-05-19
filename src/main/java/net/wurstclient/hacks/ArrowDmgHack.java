@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -70,9 +70,9 @@ public final class ArrowDmgHack extends Hack implements StopUsingItemListener
 		double y = player.getY();
 		double z = player.getZ();
 		
-		// See ServerGamePacketListenerImpl.handleMovePlayer()
+		// See ServerPlayNetworkHandler.onPlayerMove()
 		// for why it's using these numbers.
-		// Also, let me know if you find a way to bypass that check.
+		// Also, let me know if you find a way to bypass that check in 1.21.
 		double adjustedStrength = strength.getValue() / 10.0 * Math.sqrt(500);
 		Vec3 lookVec = player.getViewVector(1).scale(adjustedStrength);
 		for(int i = 0; i < 4; i++)
@@ -84,8 +84,7 @@ public final class ArrowDmgHack extends Hack implements StopUsingItemListener
 	private void sendPos(double x, double y, double z, boolean onGround)
 	{
 		ClientPacketListener netHandler = MC.player.connection;
-		netHandler
-			.send(new Pos(x, y, z, onGround, MC.player.horizontalCollision));
+		netHandler.send(new Pos(x, y, z, onGround));
 	}
 	
 	private boolean isValidItem(Item item)

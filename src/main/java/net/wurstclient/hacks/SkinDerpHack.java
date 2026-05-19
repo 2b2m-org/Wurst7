@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2026 Wurst-Imperium and contributors.
+ * Copyright (c) 2014-2025 Wurst-Imperium and contributors.
  *
  * This source code is subject to the terms of the GNU General Public
  * License, version 3. If a copy of the GPL was not distributed with this
@@ -38,7 +38,7 @@ public final class SkinDerpHack extends Hack implements UpdateListener
 		EVENTS.remove(UpdateListener.class, this);
 		
 		for(PlayerModelPart part : PlayerModelPart.values())
-			MC.options.setModelPart(part, true);
+			MC.options.toggleModelPart(part, true);
 	}
 	
 	@Override
@@ -48,6 +48,7 @@ public final class SkinDerpHack extends Hack implements UpdateListener
 			return;
 		
 		for(PlayerModelPart part : PlayerModelPart.values())
-			MC.options.setModelPart(part, !MC.options.isModelPartEnabled(part));
+			MC.options.toggleModelPart(part,
+				!MC.options.isModelPartEnabled(part));
 	}
 }
