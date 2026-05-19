@@ -1,5 +1,5 @@
 {
-  "required": true,
+  "required": false,
   "package": "net.wurstclient.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
@@ -38,8 +38,6 @@
     "GameRendererMixin",
     "GenericContainerScreenMixin",
     "HeldItemRendererMixin",
-    "indigo.AbstractBlockRenderContextMixin",
-    "indigo.BlockRenderInfoMixin",
     "IngameHudMixin",
     "InGameOverlayRendererMixin",
     "KeyBindingMixin",
@@ -73,7 +71,7 @@
     "WorldRendererMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   },
   "overwrites": {
     "requireAnnotations": true
